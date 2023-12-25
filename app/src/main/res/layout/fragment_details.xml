@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="showDetails"
+            type="com.project.movievault.model.ShowDetails" />
+
+        <!-- Reference to utility class -->
+        <import type="com.project.movievault.utils.DataBindingUtils" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:padding="8dp"
+        tools:context=".fragment.DetailFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/imageCV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="16dp">
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="475dp"
+                    android:contentDescription="Movie Image"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{showDetails.image.medium}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/titleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@{showDetails.name}"
+                android:textColor="@color/light_yellow"
+                android:textSize="32sp"
+                android:fontFamily="monospace"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageCV"
+                tools:text="All Rise" />
+
+            <TextView
+                android:id="@+id/ratingTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{@string/rating(showDetails.rating.average)}"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleTV"
+                tools:text="Rating: 6.7" />
+
+            <TextView
+                android:id="@+id/premieredTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{@string/premiered(showDetails.premiered)}"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:fontFamily="monospace"
+                app:layout_constraintBottom_toTopOf="@+id/genreTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ratingTV"
+                app:layout_constraintVertical_chainStyle="spread"
+                tools:text="Premiered: 2019-09-23" />
+
+            <TextView
+                android:id="@+id/genreTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{DataBindingUtils.listToStr(showDetails.genres)}"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:fontFamily="monospace"
+                app:layout_constraintBottom_toTopOf="@+id/summaryTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/premieredTV"
+                app:layout_constraintVertical_chainStyle="spread"
+                tools:text="Genres: Comedy" />
+
+            <TextView
+                android:id="@+id/summaryTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_margin="20dp"
+                android:text="@{DataBindingUtils.removeTags(showDetails.summary)}"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@+id/visitSiteBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/genreTV"
+                app:layout_constraintVertical_chainStyle="spread"
+                tools:text="When a rising high school football player from South Central L.A. is recruited to play for Beverly Hills High, the wins, losses and struggles of two families from vastly different worlds — Compton and Beverly Hills — begin to collide. Inspired by the life of pro football player Spencer Paysinger." />
+
+            <Button
+                android:id="@+id/visitSiteBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/light_yellow"
+                android:layout_margin="10dp"
+                android:text="Visit Site"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:fontFamily="monospace"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/summaryTV" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
+
